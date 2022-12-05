@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { AuthenticateRequestDto } from './dto/authenticate.request.dto';
 import { RegisterRequestDto } from './dto/register.request.dto';
 import { ConfirmSignupRequestDto } from './dto/confirmSignup.request.dto';
+import { LogoutRequestDto } from './dto/logout.request.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -29,6 +30,14 @@ export class AuthController {
   async confirmSignup(@Body() confirmSignupRequest: ConfirmSignupRequestDto) {
     try {
       return await this.authService.confirmSignup(confirmSignupRequest);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
+  }
+  @Post('logout')
+  async logout(@Body() logoutRequest: LogoutRequestDto) {
+    try {
+      return await this.authService.logout(logoutRequest);
     } catch (e) {
       throw new BadRequestException(e.message);
     }
