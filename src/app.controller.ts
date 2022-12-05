@@ -5,5 +5,6 @@ import JwtAuthenticationGuard from './auth/jwt.guard';
 export class AppController {
   @Get('')
   @UseGuards(JwtAuthenticationGuard)
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   helloWorld() {}
 }
