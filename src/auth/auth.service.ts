@@ -101,8 +101,36 @@ export class AuthService {
     };
     return new Promise((resolve, reject) => {
       const cognitoUser = new CognitoUser(userData);
+      console.log('cognitoUser', cognitoUser);
       cognitoUser.signOut();
       resolve('success');
+    });
+  }
+
+  async globalSignOut(logoutRequest: LogoutRequestDto) {
+    const { username } = logoutRequest;
+    const poolData = {
+      UserPoolId: this.configService.get<string>('AWS_COGNITO_USER_POOL_ID'),
+      ClientId: this.configService.get<string>('AWS_COGNITO_CLIENT_ID'),
+    };
+    const userPool = new CognitoUserPool(poolData);
+    const userData = {
+      Username: username,
+      Pool: userPool,
+    };
+    return new Promise((resolve, reject) => {
+      const cognitoUser = new CognitoUser(userData);
+      console.log('cognitoUser', cognitoUser);
+      cognitoUser.globalSignOut({
+        onSuccess: (result) => {
+          resolve(result);
+        },
+        onFailure: (err) => {
+          reject(err);
+        },
+        // cognitoUser.signOut();
+        // resolve('success');
+      });
     });
   }
 }

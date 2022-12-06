@@ -1,10 +1,12 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
 import JwtAuthenticationGuard from './auth/jwt.guard';
 
-@Controller('')
+@Controller('/test')
 export class AppController {
-  @Get('')
+  @Get('/hello')
   @UseGuards(JwtAuthenticationGuard)
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  helloWorld() {}
+  helloWorld() {
+    return 'Hello World';
+  }
 }

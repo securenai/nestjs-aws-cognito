@@ -1,4 +1,10 @@
-import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  Post,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthenticateRequestDto } from './dto/authenticate.request.dto';
 import { RegisterRequestDto } from './dto/register.request.dto';
@@ -34,6 +40,14 @@ export class AuthController {
       throw new BadRequestException(e.message);
     }
   }
+  @Post('globalSignOut')
+  async globalSignOut(@Body() logoutRequest: LogoutRequestDto) {
+    try {
+      return await this.authService.globalSignOut(logoutRequest);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
+  }
   @Post('logout')
   async logout(@Body() logoutRequest: LogoutRequestDto) {
     try {
@@ -42,4 +56,12 @@ export class AuthController {
       throw new BadRequestException(e.message);
     }
   }
+  // @Post('globalSignOut')
+  // async globalSignOut(@Body() globalSignOutRequest: GlobalSignOutRequestDto) {
+  //   try {
+  //     return await this.authService.globalSignOut(globalSignOutRequest);
+  //   } catch (e) {
+  //     throw new BadRequestException(e.message);
+  //   }
+  // }
 }
