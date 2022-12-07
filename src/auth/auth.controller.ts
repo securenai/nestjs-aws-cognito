@@ -48,10 +48,10 @@ export class AuthController {
       throw new BadRequestException(e.message);
     }
   }
-  @Post('logout')
-  async logout(@Body() logoutRequest: LogoutRequestDto) {
+  @Get('logout')
+  async logout() {
     try {
-      return await this.authService.logout(logoutRequest);
+      return await this.authService.logout();
     } catch (e) {
       throw new BadRequestException(e.message);
     }
