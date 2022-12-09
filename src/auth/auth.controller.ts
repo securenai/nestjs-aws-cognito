@@ -24,7 +24,7 @@ export class AuthController {
   @Post('register')
   @Post('awscognito/signinCallback')
   async awsCognitoSigninCallback(@Body() id: AwsCSCallbackDto) {
-    if (Object.keys(this.userAuthInfo).length) {
+    if (this.userAuthInfo.accessToken) {
       const userInfo = this.userAuthInfo;
       this.userAuthInfo = '';
       return userInfo;
