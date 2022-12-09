@@ -19,13 +19,17 @@ import { Request } from 'express';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post('awscognito/signinCallback')
-  async awsCognitoSigninCallback(@Body() id: AwsCSCallbackDto) {
-    return this.userAuthInfo;
-  }
   private userAuthInfo: any;
 
   @Post('register')
+  @Post('awscognito/signinCallback')
+  async awsCognitoSigninCallback(@Body() id: AwsCSCallbackDto) {
+    if (Object.keys(this.userAuthInfo).length) {
+      const userInfo = this.userAuthInfo;
+      this.userAuthInfo = '';
+      return userInfo;
+    }
+  }
   async register(@Body() registerRequest: RegisterRequestDto) {
     try {
       console.log('register');
