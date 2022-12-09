@@ -136,10 +136,15 @@ export class AuthService {
   }
 
   async redirect(redirectRequest: RedirectRequestDto) {
-    const { data } = redirectRequest;
-    console.log(data);
+    const { idToken, accessToken, expiresIn } = redirectRequest;
+    // console.log(idToken);
+    // const obj = {
+    //   idToken,
+    //   accessToken,
+    //   expiresIn,
+    // }
     return new Promise((resolve, reject) => {
-      if (data) {
+      if (redirectRequest) {
         resolve('success');
       } else {
         reject('error');
