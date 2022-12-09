@@ -74,7 +74,9 @@ export class AuthController {
   }
   @Post('redirect')
   async redirect(@Body() redirectRequest: RedirectRequestDto) {
+    console.log(redirectRequest);
     try {
+      console.log(redirectRequest);
       // return await this.authService.redirect(redirectRequest);
       const { idToken, accessToken, expiresIn } = redirectRequest;
       console.log(idToken, accessToken, expiresIn);
