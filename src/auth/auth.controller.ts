@@ -28,7 +28,7 @@ export class AuthController {
       const userInfo = this.userAuthInfo;
       this.userAuthInfo = '';
       return userInfo;
-    }
+    } else return { status: 403, msg: 'Bitch please' };
   }
   async register(@Body() registerRequest: RegisterRequestDto) {
     try {
