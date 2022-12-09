@@ -21,15 +21,16 @@ export class AuthController {
 
   private userAuthInfo: any;
 
-  @Post('register')
   @Post('awscognito/signinCallback')
   async awsCognitoSigninCallback(@Body() id: AwsCSCallbackDto) {
-    if (this.userAuthInfo.accessToken) {
+    if (this.userAuthInfo && this.userAuthInfo.accessToken) {
       const userInfo = this.userAuthInfo;
       this.userAuthInfo = '';
       return userInfo;
     } else return { status: 403, msg: 'Bitch please its not ready yet' };
   }
+
+  @Post('register')
   async register(@Body() registerRequest: RegisterRequestDto) {
     try {
       console.log('register');
