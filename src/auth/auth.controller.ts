@@ -4,16 +4,23 @@ import {
   Controller,
   Get,
   Post,
+  Req,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthenticateRequestDto } from './dto/authenticate.request.dto';
 import { RegisterRequestDto } from './dto/register.request.dto';
 import { ConfirmSignupRequestDto } from './dto/confirmSignup.request.dto';
 import { LogoutRequestDto } from './dto/logout.request.dto';
+import { AwsCSCallbackDto } from './dto/awsCSCallback';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
+
+  @Post('awscognito/signinCallback')
+  async awsCognitoSigninCallback(@Body() id: AwsCSCallbackDto) {
+    return this.userAuthInfo;
+  }
 
   @Post('register')
   async register(@Body() registerRequest: RegisterRequestDto) {
@@ -24,6 +31,7 @@ export class AuthController {
       throw new BadRequestException(e.message);
     }
   }
+
   @Post('authenticate')
   async authenticate(@Body() authenticateRequest: AuthenticateRequestDto) {
     try {
@@ -32,6 +40,7 @@ export class AuthController {
       throw new BadRequestException(e.message);
     }
   }
+
   @Post('confirmSignup')
   async confirmSignup(@Body() confirmSignupRequest: ConfirmSignupRequestDto) {
     try {
