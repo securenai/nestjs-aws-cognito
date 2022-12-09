@@ -11,6 +11,7 @@ import { AuthenticateRequestDto } from './dto/authenticate.request.dto';
 import { RegisterRequestDto } from './dto/register.request.dto';
 import { ConfirmSignupRequestDto } from './dto/confirmSignup.request.dto';
 import { LogoutRequestDto } from './dto/logout.request.dto';
+import { RedirectRequestDto } from "./dto/redirect.request.dto";
 import { Request } from 'express';
 
 @Controller('auth')
@@ -58,17 +59,27 @@ export class AuthController {
       throw new BadRequestException(e.message);
     }
   }
-  @Get('redirect')
-  async redirect(@Req() request: Request) {
+  @Post('redirect')
+  async redirect(@Body() redirectRequest: RedirectRequestDto) {
     try {
-      console.log('params', request.params);
-      console.log('query', request.query);
-      return { ...request.params, ...request.query };
+      return await this.authService.redirect(redirectRequest);
       // return await this.authService.redirect();
     } catch (e) {
       throw new BadRequestException(e.message);
     }
   }
+  // @Get('redirect')
+  // async redirect(@Req() request: Request) {
+  //   try {
+  //     console.log('params', request.params);
+  //     console.log('query', request.query);
+  //     return { ...request.params, ...request.query };
+
+  //     // return await this.authService.redirect();
+  //   } catch (e) {
+  //     throw new BadRequestException(e.message);
+  //   }
+  // }
   // @Post('globalSignOut')
   // async globalSignOut(@Body() globalSignOutRequest: GlobalSignOutRequestDto) {
   //   try {

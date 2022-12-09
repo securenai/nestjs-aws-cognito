@@ -10,6 +10,7 @@ import { RegisterRequestDto } from './dto/register.request.dto';
 import { AuthenticateRequestDto } from './dto/authenticate.request.dto';
 import { ConfirmSignupRequestDto } from './dto/confirmSignup.request.dto';
 import { LogoutRequestDto } from './dto/logout.request.dto';
+import { RedirectRequestDto } from './dto/redirect.request.dto';
 
 @Injectable()
 export class AuthService {
@@ -131,6 +132,18 @@ export class AuthService {
         // cognitoUser.signOut();
         // resolve('success');
       });
+    });
+  }
+
+  async redirect(redirectRequest: RedirectRequestDto) {
+    const { data } = redirectRequest;
+    console.log(data);
+    return new Promise((resolve, reject) => {
+      if (data) {
+        resolve('success');
+      } else {
+        reject('error');
+      }
     });
   }
 }
