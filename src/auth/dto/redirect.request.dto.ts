@@ -1,10 +1,10 @@
 import { IsString } from 'class-validator';
 
 export class RedirectRequestDto {
-  @IsString()
+  // @IsString()
   idToken: string;
-  @IsString()
+  // @IsString()
   accessToken: string;
-  @IsString()
+  // @IsString()
   expiresIn: string;
 }
