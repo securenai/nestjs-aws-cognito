@@ -11,6 +11,7 @@ import { AuthenticateRequestDto } from './dto/authenticate.request.dto';
 import { RegisterRequestDto } from './dto/register.request.dto';
 import { ConfirmSignupRequestDto } from './dto/confirmSignup.request.dto';
 import { LogoutRequestDto } from './dto/logout.request.dto';
+import { AwsCSCallbackDto } from './dto/awsCSCallback';
 import { RedirectRequestDto } from './dto/redirect.request.dto';
 import { Request } from 'express';
 
@@ -18,6 +19,10 @@ import { Request } from 'express';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @Post('awscognito/signinCallback')
+  async awsCognitoSigninCallback(@Body() id: AwsCSCallbackDto) {
+    return this.userAuthInfo;
+  }
   private userAuthInfo: any;
 
   @Post('register')
@@ -29,6 +34,7 @@ export class AuthController {
       throw new BadRequestException(e.message);
     }
   }
+
   @Post('authenticate')
   async authenticate(@Body() authenticateRequest: AuthenticateRequestDto) {
     try {
@@ -37,6 +43,7 @@ export class AuthController {
       throw new BadRequestException(e.message);
     }
   }
+
   @Post('confirmSignup')
   async confirmSignup(@Body() confirmSignupRequest: ConfirmSignupRequestDto) {
     try {
