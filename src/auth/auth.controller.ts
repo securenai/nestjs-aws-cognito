@@ -4,12 +4,14 @@ import {
   Controller,
   Get,
   Post,
+  Req,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthenticateRequestDto } from './dto/authenticate.request.dto';
 import { RegisterRequestDto } from './dto/register.request.dto';
 import { ConfirmSignupRequestDto } from './dto/confirmSignup.request.dto';
 import { LogoutRequestDto } from './dto/logout.request.dto';
+import { Request } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -52,6 +54,17 @@ export class AuthController {
   async logout() {
     try {
       return await this.authService.logout();
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
+  }
+  @Get('redirect')
+  async redirect(@Req() request: Request) {
+    try {
+      return { ...request.params, ...request.query };
+      console.log('params', request.params);
+      console.log('query', request.query);
+      // return await this.authService.redirect();
     } catch (e) {
       throw new BadRequestException(e.message);
     }
