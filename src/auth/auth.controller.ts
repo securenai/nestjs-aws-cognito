@@ -27,7 +27,7 @@ export class AuthController {
       const userInfo = this.userAuthInfo;
       this.userAuthInfo = '';
       return userInfo;
-    } else return { status: 403, msg: 'Bitch please its not ready yet' };
+    } else return { status: 403, msg: 'awaiting login' };
   }
 
   @Post('register')
