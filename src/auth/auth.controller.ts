@@ -12,6 +12,8 @@ import { RegisterRequestDto } from './dto/register.request.dto';
 import { ConfirmSignupRequestDto } from './dto/confirmSignup.request.dto';
 import { LogoutRequestDto } from './dto/logout.request.dto';
 import { AwsCSCallbackDto } from './dto/awsCSCallback';
+import { RedirectRequestDto } from './dto/redirect.request.dto';
+import { Request } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -21,6 +23,7 @@ export class AuthController {
   async awsCognitoSigninCallback(@Body() id: AwsCSCallbackDto) {
     return this.userAuthInfo;
   }
+  private userAuthInfo: any;
 
   @Post('register')
   async register(@Body() registerRequest: RegisterRequestDto) {
@@ -65,6 +68,34 @@ export class AuthController {
       throw new BadRequestException(e.message);
     }
   }
+  @Post('redirect')
+  async redirect(@Body() redirectRequest: RedirectRequestDto) {
+    try {
+      // return await this.authService.redirect(redirectRequest);
+      const { idToken, accessToken, expiresIn } = redirectRequest;
+      console.log(idToken, accessToken, expiresIn);
+      this.userAuthInfo = {
+        idToken,
+        accessToken,
+        expiresIn,
+      };
+      // return await this.authService.redirect();
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
+  }
+  // @Get('redirect')
+  // async redirect(@Req() request: Request) {
+  //   try {
+  //     console.log('params', request.params);
+  //     console.log('query', request.query);
+  //     return { ...request.params, ...request.query };
+
+  //     // return await this.authService.redirect();
+  //   } catch (e) {
+  //     throw new BadRequestException(e.message);
+  //   }
+  // }
   // @Post('globalSignOut')
   // async globalSignOut(@Body() globalSignOutRequest: GlobalSignOutRequestDto) {
   //   try {
