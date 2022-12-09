@@ -61,9 +61,9 @@ export class AuthController {
   @Get('redirect')
   async redirect(@Req() request: Request) {
     try {
-      return { ...request.params, ...request.query };
       console.log('params', request.params);
       console.log('query', request.query);
+      return { ...request.params, ...request.query };
       // return await this.authService.redirect();
     } catch (e) {
       throw new BadRequestException(e.message);
