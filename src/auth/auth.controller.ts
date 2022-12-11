@@ -4,7 +4,6 @@ import {
   Controller,
   Get,
   Post,
-  Req,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthenticateRequestDto } from './dto/authenticate.request.dto';
@@ -13,7 +12,6 @@ import { ConfirmSignupRequestDto } from './dto/confirmSignup.request.dto';
 import { LogoutRequestDto } from './dto/logout.request.dto';
 import { AwsCSCallbackDto } from './dto/awsCSCallback';
 import { RedirectRequestDto } from './dto/redirect.request.dto';
-import { Request } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -27,7 +25,7 @@ export class AuthController {
       const userInfo = this.userAuthInfo;
       this.userAuthInfo = '';
       return userInfo;
-    } else return { status: 403, msg: 'awaiting login' };
+    } else return { status: 403, msg: 'awaiting login to be authenticated' };
   }
 
   @Post('register')
