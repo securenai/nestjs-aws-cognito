@@ -10,7 +10,7 @@ import { AuthenticateRequestDto } from './dto/authenticate.request.dto';
 import { RegisterRequestDto } from './dto/register.request.dto';
 import { ConfirmSignupRequestDto } from './dto/confirmSignup.request.dto';
 import { LogoutRequestDto } from './dto/logout.request.dto';
-import { AwsCSCallbackDto } from './dto/awsCSCallback';
+import { AwsCSCallbackDto } from './dto/awsCSCallback.request.dto';
 import { RedirectRequestDto } from './dto/redirect.request.dto';
 
 @Controller('auth')
