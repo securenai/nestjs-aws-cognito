@@ -5,6 +5,10 @@ import {
   CognitoUserAttribute,
   CognitoUserPool,
 } from 'amazon-cognito-identity-js';
+import {
+  CognitoIdentityProviderClient,
+  DescribeUserPoolCommand,
+} from '@aws-sdk/client-cognito-identity-provider';
 import { ConfigService } from '@nestjs/config';
 import { RegisterRequestDto } from './dto/register.request.dto';
 import { AuthenticateRequestDto } from './dto/authenticate.request.dto';
@@ -43,6 +47,12 @@ export class AuthService {
   }
 
   async authenticate(user: AuthenticateRequestDto) {
+    // const config = {
+    //   UserPoolId: this.configService.get<string>('AWS_COGNITO_USER_POOL_ID'),
+    //   ClientId: this.configService.get<string>('AWS_COGNITO_CLIENT_ID'),
+    // };
+    // const client = new CognitoIdentityProviderClient(config);
+    // console.log(client);
     const { name, password } = user;
     const authenticationDetails = new AuthenticationDetails({
       Username: name,
