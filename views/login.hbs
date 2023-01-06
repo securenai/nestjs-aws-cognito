@@ -22,7 +22,9 @@
       var xhr = new XMLHttpRequest();
       var formData = new FormData(form);
       //open the request
-      xhr.open('POST','http://localhost:3000/auth/authenticate',true);
+      xhr.open('POST','https://nest-aws-cognito.herokuapp.com/auth/authenticate',true);
+      //http://localhost:3000/auth/authenticate
+      //https://nest-aws-cognito.herokuapp.com
       xhr.setRequestHeader("Content-Type", "application/json");
 
       //send the form data

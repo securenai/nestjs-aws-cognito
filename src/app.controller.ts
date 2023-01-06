@@ -18,14 +18,14 @@ import { ConfigService } from '@nestjs/config';
 export class AppController {
   userPool: string;
   clientId: string;
-  domain: string;
+  url: string;
   constructor(
     // private readonly appService: AppService,
     private configService: ConfigService,
   ) {
     this.userPool = this.configService.get<string>('AWS_COGNITO_USER_POOL_ID');
     this.clientId = this.configService.get<string>('AWS_COGNITO_CLIENT_ID');
-    // this.domain = this.configService.get<string>('AWS_COGNITO_DOMAIN');
+    this.url = this.configService.get<string>('DOMAIN') + '/auth/authenticate';
   }
 
   @Get('/login')
@@ -35,7 +35,7 @@ export class AppController {
       title: 'Login',
       userPool: this.userPool,
       clientId: this.clientId,
-      // domain: this.domain,
+      url: this.url,
     };
   }
 
