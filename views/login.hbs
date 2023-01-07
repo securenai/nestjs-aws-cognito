@@ -8,7 +8,7 @@
   <body>
     <div class="app-wrap">
       <h3>Coolermaster {{ title }}</h3>
-      <form action="https://simpleapptest.auth.us-east-1.amazoncognito.com/login?client_id=tll59p88np9bvv6vrtk5d0erb&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=http://localhost:3000" method="POST">
+      <form id="myForm">
       <input type="text" placeholder="Enter username" name="name">
       <input type="password" "Enter password" name="password">
       <button>Login</button>
@@ -31,7 +31,7 @@
       var formData = new FormData(form);
       //open the request
       //xhr.open('POST','https://nest-aws-cognito.herokuapp.com/auth/authenticate',true);
-      xhr.open('GET','/login?client_id=tll59p88np9bvv6vrtk5d0erb&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=http://localhost:3000',true);
+      xhr.open('POST','http://localhost:3000/auth/authenticate',true);
       //http://localhost:3000/auth/authenticate
       //https://nest-aws-cognito.herokuapp.com
       xhr.setRequestHeader("Content-Type", "application/json");
