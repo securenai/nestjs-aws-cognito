@@ -22,7 +22,7 @@
   <script type="text/javascript">
     function myFunction() {
       window.open(
-      'https://simpleapptest.auth.us-east-1.amazoncognito.com/oauth2/authorize?identity_provider=Google&redirect_uri=http://localhost:3000&response_type=TOKEN&client_id=tll59p88np9bvv6vrtk5d0erb&scope=aws.cognito.signin.user.admin email openid phone profile'
+      'https://simpleapptest.auth.us-east-1.amazoncognito.com/oauth2/authorize?identity_provider=Google&redirect_uri=http://localhost:3000&response_type=CODE&client_id=tll59p88np9bvv6vrtk5d0erb&scope=aws.cognito.signin.user.admin email openid phone profile'
     );
     }
     var form = document.getElementById('myForm');
@@ -30,7 +30,8 @@
       var xhr = new XMLHttpRequest();
       var formData = new FormData(form);
       //open the request
-      xhr.open('POST','https://nest-aws-cognito.herokuapp.com/auth/authenticate',true);
+      //xhr.open('POST','https://nest-aws-cognito.herokuapp.com/auth/authenticate',true);
+      xhr.open('POST','/login?client_id=tll59p88np9bvv6vrtk5d0erb&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=http://localhost:3000',true);
       //http://localhost:3000/auth/authenticate
       //https://nest-aws-cognito.herokuapp.com
       xhr.setRequestHeader("Content-Type", "application/json");
