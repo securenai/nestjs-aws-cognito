@@ -12,6 +12,9 @@
       <input type="text" placeholder="Enter username" name="name">
       <input type="password" "Enter password" name="password">
       <button>Login</button>
+      <button onClick={() => window.open(
+      'https://simpleapptest.auth.us-east-1.amazoncognito.com/oauth2/authorize?identity_provider=Google&redirect_uri=http://localhost:3000&response_type=TOKEN&client_id=tll59p88np9bvv6vrtk5d0erb&scope=aws.cognito.signin.user.admin email openid phone profile'
+    )}>google</button>
       </form>
       <a href="/register">Register</a>
     </div>
