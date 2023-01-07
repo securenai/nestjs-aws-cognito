@@ -15,6 +15,7 @@ import { AuthenticateRequestDto } from './dto/authenticate.request.dto';
 import { ConfirmSignupRequestDto } from './dto/confirmSignup.request.dto';
 import { LogoutRequestDto } from './dto/logout.request.dto';
 import { RedirectRequestDto } from './dto/redirect.request.dto';
+import { ResendCodeRequestDto } from './dto/resendCode.request.dto';
 
 @Injectable()
 export class AuthService {
@@ -96,6 +97,38 @@ export class AuthService {
           resolve(result);
         }
       });
+    });
+  }
+
+  async resendCode(resendCodeRequestDto: ResendCodeRequestDto) {
+    const { username } = resendCodeRequestDto;
+    const poolData = {
+      UserPoolId: this.configService.get<string>('AWS_COGNITO_USER_POOL_ID'),
+      ClientId: this.configService.get<string>('AWS_COGNITO_CLIENT_ID'),
+    };
+    const userPool = new CognitoUserPool(poolData);
+    const userData = {
+      Username: username,
+      Pool: userPool,
+    };
+    return new Promise((resolve, reject) => {
+      const cognitoUser = new CognitoUser(userData);
+      console.log('cognitoUser', cognitoUser);
+      cognitoUser.resendConfirmationCode((err, result) => {
+        console.log(result);
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+      // cognitoUser.confirmRegistration(confirmationCode, true, (err, result) => {
+      //   if (err) {
+      //     reject(err);
+      //   } else {
+      //     resolve(result);
+      //   }
+      // });
     });
   }
 

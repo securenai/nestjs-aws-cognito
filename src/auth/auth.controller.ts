@@ -55,6 +55,26 @@ export class AuthController {
       throw new BadRequestException(e.message);
     }
   }
+
+  @Post('resendCode')
+  async resendCode(@Body() confirmSignupRequest: ConfirmSignupRequestDto) {
+    try {
+      var poolData = {
+        UserPoolId: '...', // Your user pool id here
+        ClientId: '...', // Your client id here
+      };
+
+      var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+      var userData = {
+        Username: 'username',
+        Pool: userPool,
+      };
+      return await this.authService.confirmSignup(confirmSignupRequest);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
+  }
+
   @Post('globalSignOut')
   async globalSignOut(@Body() logoutRequest: LogoutRequestDto) {
     try {
