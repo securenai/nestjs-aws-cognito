@@ -12,6 +12,7 @@ import { ConfirmSignupRequestDto } from './dto/confirmSignup.request.dto';
 import { LogoutRequestDto } from './dto/logout.request.dto';
 import { AwsCSCallbackDto } from './dto/awsCSCallback.request.dto';
 import { RedirectRequestDto } from './dto/redirect.request.dto';
+import { ResendCodeRequestDto } from './dto/resendCode.request.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -57,19 +58,9 @@ export class AuthController {
   }
 
   @Post('resendCode')
-  async resendCode(@Body() confirmSignupRequest: ConfirmSignupRequestDto) {
+  async resendCode(@Body() resendCodeRequest: ResendCodeRequestDto) {
     try {
-      var poolData = {
-        UserPoolId: '...', // Your user pool id here
-        ClientId: '...', // Your client id here
-      };
-
-      var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-      var userData = {
-        Username: 'username',
-        Pool: userPool,
-      };
-      return await this.authService.confirmSignup(confirmSignupRequest);
+      return await this.authService.resendCode(resendCodeRequest);
     } catch (e) {
       throw new BadRequestException(e.message);
     }
