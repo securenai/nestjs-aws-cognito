@@ -20,6 +20,15 @@ export class AuthController {
 
   private userAuthInfo: any;
 
+  @Get('aadRedirect')
+  async signinCallback(req: Request, res: Response) {
+    try {
+      console.log(req);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
+  }
+
   @Post('awscognito/signinCallback')
   async awsCognitoSigninCallback(@Body() id: AwsCSCallbackDto) {
     if (this.userAuthInfo && this.userAuthInfo.accessToken) {
