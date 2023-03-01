@@ -4,6 +4,7 @@ import {
   Controller,
   Get,
   Post,
+  Query,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthenticateRequestDto } from './dto/authenticate.request.dto';
@@ -21,9 +22,9 @@ export class AuthController {
   private userAuthInfo: any;
 
   @Get('aadRedirect')
-  async signinCallback(req: Request, res: Response) {
+  async signinCallback(@Query() query: any) {
     try {
-      console.log(req);
+      console.log(query);
     } catch (e) {
       throw new BadRequestException(e.message);
     }
