@@ -113,7 +113,7 @@ export class AuthService {
     };
     return new Promise((resolve, reject) => {
       const cognitoUser = new CognitoUser(userData);
-      console.log('cognitoUser', cognitoUser);
+      console.log('cognitoUserr', cognitoUser);
       cognitoUser.resendConfirmationCode((err, result) => {
         console.log(result);
         if (err) {
