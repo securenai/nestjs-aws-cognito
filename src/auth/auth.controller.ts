@@ -5,6 +5,7 @@ import {
   Get,
   Post,
   Query,
+  Req,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthenticateRequestDto } from './dto/authenticate.request.dto';
@@ -14,6 +15,7 @@ import { LogoutRequestDto } from './dto/logout.request.dto';
 import { AwsCSCallbackDto } from './dto/awsCSCallback.request.dto';
 import { RedirectRequestDto } from './dto/redirect.request.dto';
 import { ResendCodeRequestDto } from './dto/resendCode.request.dto';
+import { Request } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -22,9 +24,9 @@ export class AuthController {
   private userAuthInfo: any;
 
   @Get('aadRedirect')
-  async signinCallback(@Query() query: any) {
+  async signinCallback(@Req() req: Request) {
     try {
-      console.log(query);
+      console.log(req.originalUrl);
     } catch (e) {
       throw new BadRequestException(e.message);
     }
