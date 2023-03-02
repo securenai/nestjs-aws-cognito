@@ -26,7 +26,7 @@ export class AuthController {
   @Get('aadRedirect')
   async signinCallback(@Req() req: Request) {
     try {
-      console.log(req.originalUrl);
+      console.log(req);
     } catch (e) {
       throw new BadRequestException(e.message);
     }
