@@ -23,10 +23,84 @@ export class AuthController {
 
   private userAuthInfo: any;
 
-  @Get('aadRedirect')
+  @Get('stormHome')
   async signinCallback(@Req() req: Request) {
     try {
-      console.log(req);
+      console.log('test-storm-home');
+      const data = {
+        heroBackgroundMedia: {
+          type: 'image',
+          src: 'https://res.cloudinary.com/dfkw9hdq3/image/upload/v1689612267/CI-Temp/hero.png',
+        },
+        featureBackgroundMedia: {
+          type: 'image',
+          src: 'https://res.cloudinary.com/dfkw9hdq3/image/upload/v1689612469/CI-Temp/feature_bg.png',
+        },
+        planPrices: {
+          planPay: '$0.99',
+          planSub: '$9.99',
+        },
+        GameGalleryImages: {
+          cat1: [
+            'https://source.unsplash.com/random?sig=1g',
+            'https://source.unsplash.com/random?sig=2g',
+            'https://source.unsplash.com/random?sig=3g',
+            'https://source.unsplash.com/random?sig=4g',
+            'https://source.unsplash.com/random?sig=5g',
+            'https://source.unsplash.com/random?sig=6g',
+            'https://source.unsplash.com/random?sig=7g',
+            'https://source.unsplash.com/random?sig=8g',
+          ],
+          cat2: [
+            'https://source.unsplash.com/random?sig=9g',
+            'https://source.unsplash.com/random?sig=10g',
+            'https://source.unsplash.com/random?sig=11g',
+            'https://source.unsplash.com/random?sig=12g',
+            'https://source.unsplash.com/random?sig=13g',
+            'https://source.unsplash.com/random?sig=14g',
+            'https://source.unsplash.com/random?sig=15g',
+            'https://source.unsplash.com/random?sig=16g',
+          ],
+          cat3: [
+            'https://source.unsplash.com/random?sig=17g',
+            'https://source.unsplash.com/random?sig=18g',
+            'https://source.unsplash.com/random?sig=19g',
+            'https://source.unsplash.com/random?sig=20g',
+            'https://source.unsplash.com/random?sig=21g',
+            'https://source.unsplash.com/random?sig=22g',
+            'https://source.unsplash.com/random?sig=23g',
+            'https://source.unsplash.com/random?sig=24g',
+          ],
+          cat4: [
+            'https://source.unsplash.com/random?sig=25g',
+            'https://source.unsplash.com/random?sig=26g',
+            'https://source.unsplash.com/random?sig=27g',
+            'https://source.unsplash.com/random?sig=28g',
+            'https://source.unsplash.com/random?sig=29g',
+            'https://source.unsplash.com/random?sig=30g',
+            'https://source.unsplash.com/random?sig=31g',
+            'https://source.unsplash.com/random?sig=32g',
+          ],
+          cat5: [
+            'https://source.unsplash.com/random?sig=33g',
+            'https://source.unsplash.com/random?sig=34g',
+            'https://source.unsplash.com/random?sig=35g',
+            'https://source.unsplash.com/random?sig=36g',
+            'https://source.unsplash.com/random?sig=37g',
+            'https://source.unsplash.com/random?sig=38g',
+            'https://source.unsplash.com/random?sig=39g',
+            'https://source.unsplash.com/random?sig=40g',
+          ],
+        },
+        CarouselImages: [
+          'https://res.cloudinary.com/dfkw9hdq3/image/upload/v1688580459/CI-Temp/Banner_bmmtfm.png',
+          'https://res.cloudinary.com/dfkw9hdq3/image/upload/v1688580459/CI-Temp/Banner_bmmtfm.png',
+          'https://res.cloudinary.com/dfkw9hdq3/image/upload/v1688580459/CI-Temp/Banner_bmmtfm.png',
+          'https://res.cloudinary.com/dfkw9hdq3/image/upload/v1688580459/CI-Temp/Banner_bmmtfm.png',
+          'https://res.cloudinary.com/dfkw9hdq3/image/upload/v1688580459/CI-Temp/Banner_bmmtfm.png',
+        ],
+      };
+      return data;
     } catch (e) {
       throw new BadRequestException(e.message);
     }
